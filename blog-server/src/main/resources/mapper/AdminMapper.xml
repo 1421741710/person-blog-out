@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itluo.mapper.AdminMapper">
+    <select id="pageQuery" resultType="com.itluo.entity.Admin">
+        select * from admin
+        <where>
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>
+            <if test="username != null and username != ''">
+                and username like concat('%',#{username},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <update id="update" parameterType="Admin">
+        update admin
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="adminIp != null">admin_ip = #{adminIp},</if>
+            <if test="role != null">role = #{role},</if>
+            <if test="loginTime != null">login_time = #{loginTime},</if>
+            <if test="updateTime != null">update_Time = #{updateTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

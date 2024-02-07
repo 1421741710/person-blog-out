@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itluo.mapper.ArticleMapper">
+    <select id="pageQuery" resultType="com.itluo.entity.Article">
+        select * from article
+        <where>
+            <if test="title != null and title != ''">
+                and title like concat('%',#{title},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <update id="update" parameterType="Article">
+        update article
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="secondary != null">secondary = #{secondary},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="likes != null">likes = #{likes},</if>
+            <if test="favorite != null">favorite = #{favorite},</if>
+            <if test="updateTime != null">update_Time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itluo.mapper.UserMapper">
+    <select id="pageQuery" resultType="com.itluo.vo.UserVO">
+        select * from user
+        <where>
+            <if test="username != null and username != ''">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="mailbox != null and mailbox != ''">
+                and mailbox like concat('%',#{mailbox},'%')
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <update id="update" parameterType="User">
+        update user
+        <set>
+            <if test="password != null">password = #{password},</if>
+            <if test="mailbox != null">mailbox = #{mailbox},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="loginTime != null">login_time = #{loginTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="batchSelectUsers" resultType="com.itluo.entity.User">
+        SELECT * FROM user WHERE id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

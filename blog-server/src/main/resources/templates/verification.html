@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        hr{
+            margin-top: 25px;
+        }
+        p{
+            color: #000;
+            font-size: 13px;
+            text-align: center;
+        }
+        h3{
+            color: #000000;
+            text-align: center;
+            font-size: 32px;
+        }
+        img{
+            width: 50%;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center;">
+            <img src="https://music-1306786696.cos.ap-guangzhou.myqcloud.com/loginlogo.png"/>
+        </div>
+        <h1>电子邮件验证码</h1>
+        <!-- <hr/> -->
+        <p>请在<strong>{typeName}</strong>时输入此代码</p>
+        <h3><strong>{code}</strong></h3>
+        <p>如果不是您本人，请忽略；有人可能输错了电子邮件地址。</p>
+        <p>此验证码有效时长为:60秒</p>
+        <p>个人博客网站团队</p>
+    </div>
+</body>
+</html>

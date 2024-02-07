@@ -1,0 +1,65 @@
+server:
+  port: 8848
+
+spring:
+#  profiles:
+#    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/big?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: xxxxxxxx
+  redis:
+    host: localhost
+    port: 6379
+    password: xxxxx
+    database: 1
+  mail:
+    host: smtp.qq.com
+    username: xxxxxxxx@qq.com
+    password: xxxxxxxxx
+    from: xxxxxxxx@qq.com
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.itluo.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      itluo:
+        mapper: debug
+        service: info
+        controller: info
+
+luo:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: luoqin
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+#    admin-ttl: 60000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: Authorization
+
+    user-secret-key: luoqinphone
+    user-ttl: 7200000
+    user-token-name: Authorization
+  tencentoss:
+    endpoint: xxxxxxxxxxxxx
+    bucket: xxxxxxxxxxx
+    region: xxxxxxxxxx
+    secret-id: xxxxxxxxxxxxxxxxxx
+    secret-key: xxxxxxxxxxxxxxxxx
+knife4j:
+  enable: true
+  basic:
+    enable: true
+    username: admin
+    password: 123123

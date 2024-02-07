@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itluo.mapper.ProcessMapper">
+    <select id="pageQuery" resultType="com.itluo.vo.ProcessVO">
+        select p.*, u.username AS userName, a.username AS adminName
+        from process p
+        LEFT JOIN user u ON p.user_id = u.id
+        LEFT JOIN admin a ON p.admin_id = a.id
+        <where>
+            <if test="type != null and type != ''">
+                and p.type = #{type}
+            </if>
+            <if test="status != null and status != ''">
+                and p.status = #{status}
+            </if>
+            <if test="result != null and result != ''">
+                and p.result = #{result}
+            </if>
+        </where>
+        order by p.create_time desc
+    </select>
+
+    <update id="update" parameterType="Process">
+        update process
+        <set>
+            <if test="adminId != null">admin_id = #{adminId},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="result != null">result = #{result},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="updateTime != null">update_Time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

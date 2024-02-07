@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itluo.mapper.UserInfoMapper">
+    <select id="pageQuery" resultType="com.itluo.entity.UserInfo">
+        select * from user_info
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone like concat('%',#{phone},'%')
+            </if>
+            <if test="address != null and address != ''">
+                and address like concat('%',#{address},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <update id="update" parameterType="UserInfo">
+        update user_info
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_Time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

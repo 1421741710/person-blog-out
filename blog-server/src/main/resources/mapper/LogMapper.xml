@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itluo.mapper.LogMapper">
+    <select id="pageQuery" resultType="com.itluo.entity.Log">
+        select * from log
+        <where>
+            <if test="module != null and module != ''">
+                and module like concat('%',#{module},'%')
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator like concat('%',#{operator},'%')
+            </if>
+            <if test="startTime != null and finishTime != null">
+                and create_time &gt;=#{startTime} and create_time &lt;=#{finishTime}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itluo.mapper.NotificationsMapper">
+    <select id="pageQuery" resultType="com.itluo.vo.NotificationsVO">
+        select n.id, u.username AS username, n.type,n.content,n.status,n.create_time,n.update_time
+        from notifications n
+        LEFT JOIN user u ON n.user_id = u.id
+        <where>
+                type = 2
+            <if test="content != null and content != ''">
+                and content like concat('%',#{content},'%')
+            </if>
+        </where>
+        order by n.create_time desc
+    </select>
+
+    <update id="update" parameterType="Notifications">
+        update notifications
+        <set>
+            <if test="content != null">content = #{content},</if>
+            <if test="updateTime != null">update_Time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
